@@ -1,7 +1,7 @@
-# Учебный проект «Код и Магия» [![Build status][travis-image]][travis-url]
+﻿# Учебный проект «Код и Магия» [![Build status][travis-image]][travis-url]
 
-* Студент: [Неопознанный енот](https://up.htmlacademy.ru/javascript/19/user/931533).
-* Наставник: `Неизвестно`.
+* Студент: [Ангелина Ермакова](https://up.htmlacademy.ru/javascript/19/user/931533).
+* Наставник: [Убайд Усаев](https://htmlacademy.ru/profile/id1340949).
 
 ---
 
