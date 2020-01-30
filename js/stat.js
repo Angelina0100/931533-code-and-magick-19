@@ -57,38 +57,3 @@ window.renderStatistics = function (ctx, names, times) {
     console.log(CLOUD_Y + GAP * 5 + BAR_HEIGHT - (BAR_HEIGHT * times[i] / maxTime));
   }
 }
-
-
-
-/*
-
-Пример:
-
-var getFunct = function () {}
-function getFunct() {}
-
-var getFunct = function () {
-  for(var i///) {
-
-  }
-  return
-}
-
-var getFunct = function (a, b, c) {
-  for(var i///) {
-    a , b, c
-  }
-}
-
-var getName = function (name) {
-  return name.toUpperCase();
-}
-
-var cat = {
-  name: 'Кошка',
-  age: 5,
-  getName: function () {
-    return this.name;
-  }
-}
-*/
