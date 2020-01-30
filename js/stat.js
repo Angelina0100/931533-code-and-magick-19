@@ -24,7 +24,6 @@ var getMaxElement = function (timesArr) {
   return maxElement;
 };
 
-
 window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
@@ -32,15 +31,14 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillStyle = '#000';
   ctx.font = '16px PT Mono';
   ctx.textBaseline = 'hanging';
-  ctx.fillText('Ура вы победили!', CLOUD_X + FONT_GAP, CLOUD_Y + FONT_GAP); // 100 + 10 = 110; 10 + 10 = 20
-  ctx.fillText('Список результатов: ', CLOUD_X + FONT_GAP, CLOUD_Y + FONT_GAP*2); // 110; 20 + 20 = 40
+  ctx.fillText('Ура вы победили!', CLOUD_X + FONT_GAP, CLOUD_Y + FONT_GAP);
+  ctx.fillText('Список результатов: ', CLOUD_X + FONT_GAP, CLOUD_Y + FONT_GAP*2);
 
   for (var i = 0; i < names.length; i++) {
     ctx.fillText(names[i], CLOUD_X + GAP + FONT_GAP + (BAR_WIDTH + BAR_GAP) * i, CLOUD_Y + CLOUD_HEIGHT - GAP*3);
   };
 
   var maxTime = getMaxElement(times);
-  console.log(maxTime, times);
 
   var getRandomColor = function () {
     return 'hsl(240, ' + Math.round(Math.random() * 100) + '%, 80%)';
@@ -49,11 +47,11 @@ window.renderStatistics = function (ctx, names, times) {
 
   for (var i = 0; i < times.length; i++) {
     var currentColor = names[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : getRandomColor();
-    /*ctx.fillRect(CLOUD_X + GAP + FONT_GAP + (BAR_WIDTH + BAR_GAP) * i, CLOUD_HEIGHT - 50 - (BAR_HEIGHT * times[i] / maxTime), BAR_WIDTH, BAR_HEIGHT * times[i] / maxTime);*/
     ctx.fillStyle = currentColor;
     ctx.fillRect(CLOUD_X + GAP * 3  + (BAR_WIDTH + BAR_GAP) * i, CLOUD_Y + CLOUD_HEIGHT - GAP * 4 - BAR_HEIGHT + (BAR_HEIGHT - BAR_HEIGHT * times[i] / maxTime), BAR_WIDTH, BAR_HEIGHT * times[i] / maxTime);
-    /*ctx.fillText(Math.round(times[i]), CLOUD_X + GAP * 3 + (BAR_WIDTH + BAR_GAP) * i, CLOUD_HEIGHT - BAR_HEIGHT * times[i] / maxTime - FONT_GAP - GAP);*/
+    if (times[i]) {
+      ctx.fillStyle = 'black';
+    };
     ctx.fillText(Math.round(times[i]), CLOUD_X + GAP * 3 + (BAR_WIDTH + BAR_GAP) * i, CLOUD_Y + CLOUD_HEIGHT - GAP * 6 - BAR_HEIGHT + (BAR_HEIGHT - BAR_HEIGHT * times[i] / maxTime));
-    console.log(CLOUD_Y + GAP * 5 + BAR_HEIGHT - (BAR_HEIGHT * times[i] / maxTime));
-  }
+  };
 }
