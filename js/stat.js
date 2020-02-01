@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 // eslint-disable-next-line strict
 var CLOUD_WIDTH = 420;
 var CLOUD_HEIGHT = 270;
@@ -35,10 +35,6 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Ура вы победили!', CLOUD_X + FONT_GAP, CLOUD_Y + FONT_GAP);
   ctx.fillText('Список результатов: ', CLOUD_X + FONT_GAP, CLOUD_Y + FONT_GAP * 2);
 
-  for (var i = 0; i < names.length; i++) {
-    ctx.fillText(names[i], CLOUD_X + GAP + FONT_GAP + (BAR_WIDTH + BAR_GAP) * i, CLOUD_Y + CLOUD_HEIGHT - GAP * 3);
-  }
-
   var maxTime = getMaxElement(times);
 
   var getRandomColor = function () {
@@ -46,6 +42,7 @@ window.renderStatistics = function (ctx, names, times) {
   };
 
   for (var i = 0; i < times.length; i++) {
+    ctx.fillText(names[i], CLOUD_X + GAP + FONT_GAP + (BAR_WIDTH + BAR_GAP) * i, CLOUD_Y + CLOUD_HEIGHT - GAP * 3);
     var currentColor = names[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : getRandomColor();
     ctx.fillStyle = currentColor;
     ctx.fillRect(CLOUD_X + GAP * 3 + (BAR_WIDTH + BAR_GAP) * i, CLOUD_Y + CLOUD_HEIGHT - GAP * 4 - BAR_HEIGHT + (BAR_HEIGHT - BAR_HEIGHT * times[i] / maxTime), BAR_WIDTH, BAR_HEIGHT * times[i] / maxTime);
