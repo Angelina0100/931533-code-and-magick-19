@@ -1,4 +1,5 @@
-var CLOUD_WIDTH = 420
+// eslint-disable-next-line strict
+var CLOUD_WIDTH = 420;
 var CLOUD_HEIGHT = 270;
 var CLOUD_X = 100;
 var CLOUD_Y = 10;
@@ -20,7 +21,7 @@ var getMaxElement = function (timesArr) {
     if (maxElement < timesArr[i]) {
       maxElement = timesArr[i];
     }
-  };
+  }
   return maxElement;
 };
 
@@ -32,11 +33,11 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.font = '16px PT Mono';
   ctx.textBaseline = 'hanging';
   ctx.fillText('Ура вы победили!', CLOUD_X + FONT_GAP, CLOUD_Y + FONT_GAP);
-  ctx.fillText('Список результатов: ', CLOUD_X + FONT_GAP, CLOUD_Y + FONT_GAP*2);
+  ctx.fillText('Список результатов: ', CLOUD_X + FONT_GAP, CLOUD_Y + FONT_GAP * 2);
 
   for (var i = 0; i < names.length; i++) {
-    ctx.fillText(names[i], CLOUD_X + GAP + FONT_GAP + (BAR_WIDTH + BAR_GAP) * i, CLOUD_Y + CLOUD_HEIGHT - GAP*3);
-  };
+    ctx.fillText(names[i], CLOUD_X + GAP + FONT_GAP + (BAR_WIDTH + BAR_GAP) * i, CLOUD_Y + CLOUD_HEIGHT - GAP * 3);
+  }
 
   var maxTime = getMaxElement(times);
 
@@ -44,14 +45,13 @@ window.renderStatistics = function (ctx, names, times) {
     return 'hsl(240, ' + Math.round(Math.random() * 100) + '%, 80%)';
   };
 
-
   for (var i = 0; i < times.length; i++) {
     var currentColor = names[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : getRandomColor();
     ctx.fillStyle = currentColor;
-    ctx.fillRect(CLOUD_X + GAP * 3  + (BAR_WIDTH + BAR_GAP) * i, CLOUD_Y + CLOUD_HEIGHT - GAP * 4 - BAR_HEIGHT + (BAR_HEIGHT - BAR_HEIGHT * times[i] / maxTime), BAR_WIDTH, BAR_HEIGHT * times[i] / maxTime);
+    ctx.fillRect(CLOUD_X + GAP * 3 + (BAR_WIDTH + BAR_GAP) * i, CLOUD_Y + CLOUD_HEIGHT - GAP * 4 - BAR_HEIGHT + (BAR_HEIGHT - BAR_HEIGHT * times[i] / maxTime), BAR_WIDTH, BAR_HEIGHT * times[i] / maxTime);
     if (times[i]) {
       ctx.fillStyle = 'black';
-    };
+    }
     ctx.fillText(Math.round(times[i]), CLOUD_X + GAP * 3 + (BAR_WIDTH + BAR_GAP) * i, CLOUD_Y + CLOUD_HEIGHT - GAP * 6 - BAR_HEIGHT + (BAR_HEIGHT - BAR_HEIGHT * times[i] / maxTime));
-  };
-}
+  }
+};
