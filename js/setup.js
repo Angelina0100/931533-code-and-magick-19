@@ -1,10 +1,12 @@
 'use strict';
-var wizards = {
+//сделать отдельными массивами
+var Wizards = {
   WIZARD_NAMES: ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'],
   WIZARD_SECOND_NAMES: ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'],
   COAT_COLORS: ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'],
   EYE_COLORS: ['black', 'red', 'blue', 'yellow', 'green']
 };
+var QUANTITY = 4;
 
 var userDialog = document.querySelector('.setup');
 userDialog.classList.remove('hidden');
@@ -17,18 +19,37 @@ var getRandomElement = function (array) {
   return array[randomElementIndex];
 };
 
-var renderWizard = function (firstNAme, secondName, coat, eye) {
-  var wizardElement = similarWizardTemplate.cloneNode(true);
-  wizardElement.querySelector('.setup-similar-label').textContent = getRandomElement(wizards.WIZARD_NAMES) + ' ' + getRandomElement(wizards.WIZARD_SECOND_NAMES);
-  wizardElement.querySelector('.wizard-coat').style.fill = getRandomElement(wizards.COAT_COLORS);
-  wizardElement.querySelector('.wizard-coat').style.fill = getRandomElement(wizards.COAT_COLORS);
-  wizardElement.querySelector('.wizard-eyes').style.fill = getRandomElement(wizards.EYE_COLORS);
-  return wizardElement;
+var getWizardName = function(firstName, secondName) {
+  var wizardName = getRandomElement(firstName) + ' ' + getRandomElement(secondName);
+  return wizardName;
 }
 
-var fragment = document.createDocumentFragment();
-for (var i = 0; i < 4; i ++) {
-  fragment.appendChild(renderWizard(wizards.WIZARD_NAMES, wizards.WIZARD_SECOND_NAMES, wizards.COAT_COLORS, wizards.EYE_COLORS));
+var createPlayer = function () {
+  var players = [];
+  for (var j = 0; j < QUANTITY; j++) {
+    var player = {
+      name: getWizardName(Wizards.WIZARD_NAMES, Wizards.WIZARD_SECOND_NAMES),
+      coat: getRandomElement(Wizards.COAT_COLORS),
+      eye: getRandomElement(Wizards.EYE_COLORS)
+    }
+    players.push(player);
+  }
+  return players;
 }
-similarListElement.appendChild(fragment);
+createPlayer();
+
+
+var renderWizard = function () {
+  var fragment = document.createDocumentFragment();
+  var players = createPlayer();
+  for (var i = 0; i < players.length; i ++) {
+    var wizardElement = similarWizardTemplate.cloneNode(true);
+    wizardElement.querySelector('.setup-similar-label').textContent = players[i].name;
+    wizardElement.querySelector('.wizard-coat').style.fill = players[i].coat;
+    wizardElement.querySelector('.wizard-eyes').style.fill = players[i].eye;
+    fragment.appendChild(wizardElement);
+  }
+  similarListElement.appendChild(fragment);
+}
+renderWizard();
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
