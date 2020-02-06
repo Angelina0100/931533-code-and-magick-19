@@ -1,11 +1,9 @@
 'use strict';
-//сделать отдельными массивами
-var Wizards = {
-  WIZARD_NAMES: ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'],
-  WIZARD_SECOND_NAMES: ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'],
-  COAT_COLORS: ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'],
-  EYE_COLORS: ['black', 'red', 'blue', 'yellow', 'green']
-};
+
+var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
+var WIZARD_SECOND_NAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
+var COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
+var EYE_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var QUANTITY = 4;
 
 var userDialog = document.querySelector('.setup');
@@ -24,24 +22,24 @@ var getWizardName = function(firstName, secondName) {
   return wizardName;
 }
 
-var createPlayer = function () {
+var createPlayers = function () {
   var players = [];
   for (var j = 0; j < QUANTITY; j++) {
     var player = {
-      name: getWizardName(Wizards.WIZARD_NAMES, Wizards.WIZARD_SECOND_NAMES),
-      coat: getRandomElement(Wizards.COAT_COLORS),
-      eye: getRandomElement(Wizards.EYE_COLORS)
+      name: getWizardName(WIZARD_NAMES, WIZARD_SECOND_NAMES),
+      coat: getRandomElement(COAT_COLORS),
+      eye: getRandomElement(EYE_COLORS)
     }
     players.push(player);
   }
   return players;
 }
-createPlayer();
+createPlayers();
 
 
 var renderWizard = function () {
   var fragment = document.createDocumentFragment();
-  var players = createPlayer();
+  var players = createPlayers();
   for (var i = 0; i < players.length; i ++) {
     var wizardElement = similarWizardTemplate.cloneNode(true);
     wizardElement.querySelector('.setup-similar-label').textContent = players[i].name;
